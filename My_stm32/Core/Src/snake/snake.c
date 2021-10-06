@@ -132,6 +132,7 @@ void snake_move()
 	}
 }
 
+
 void snake_init()
 {
 	srand(HAL_GetTick());
@@ -155,6 +156,18 @@ void snake_init()
 	{
 		HAL_Delay(40);
 		snake_move();
+		if(eat_flag)
+		{
+			x = rand() % 64;
+			y = rand() % 32;
+			while(snake_vector[y][x] != '\0')
+			{
+				x = rand() % 64;
+				y = rand() % 32;
+			}
+			snake_vector[y][x] = 'T';
+			eat_flag = 0;
+		}
 		snake_screen_print();
 		if(game_over_flag)
 		{

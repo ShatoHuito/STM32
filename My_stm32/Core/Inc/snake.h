@@ -15,7 +15,7 @@
 int key_flag_right;
 int key_flag_left;
 int game_over_flag;
-
+int eat_flag;
 
 char snake_vector[OLED_HEIGHT / 2][OLED_WIDTH / 2];
 // R - right L - left U - up D - down (LOW CASE r l u d for TAIL!!)
