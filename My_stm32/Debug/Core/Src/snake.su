@@ -1,0 +1,5 @@
+snake.c:24:9:y_pixel_bit_return	24	static
+snake.c:40:6:temp_screen_init	24	static
+snake.c:46:6:snake_screen_print	16	static
+snake.c:65:6:snake_move	24	static
+snake.c:183:6:snake_init	24	static

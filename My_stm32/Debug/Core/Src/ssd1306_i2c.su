@@ -1,0 +1,11 @@
+ssd1306_i2c.c:283:6:sendCommand	24	static
+ssd1306_i2c.c:290:6:sendData	24	static
+ssd1306_i2c.c:297:6:LCD_Goto	16	static
+ssd1306_i2c.c:306:6:LCD_Clear	16	static
+ssd1306_i2c.c:328:6:OLED_print_all_screen	24	static
+ssd1306_i2c.c:355:6:OLED_print_pix	24	static
+ssd1306_i2c.c:378:6:OLED_print_circle	40	static
+ssd1306_i2c.c:401:6:LCD_Char	32	static
+ssd1306_i2c.c:420:6:OLED_string	16	static
+ssd1306_i2c.c:429:6:OLED_num_to_str	16	static
+ssd1306_i2c.c:442:6:OLED_init	8	static
