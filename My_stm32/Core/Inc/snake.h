@@ -11,21 +11,22 @@
 #include "ssd1306_i2c.h"
 #include <stdlib.h>
 #include <time.h>
+#include <main.h>
 
-int key_flag_right;
-int key_flag_left;
-int game_over_flag;
-int eat_flag;
+uint32_t key_flag_right;
+uint32_t key_flag_left;
+uint32_t game_over_flag;
+uint32_t eat_flag;
 
-char snake_vector[OLED_HEIGHT / 2][OLED_WIDTH / 2];
+uint8_t snake_vector[OLED_HEIGHT / 2][OLED_WIDTH / 2];
 // R - right L - left U - up D - down (LOW CASE r l u d for TAIL!!)
 // r - right for tail l - left u - up d - down
 // 0 - up for head 3 - right 6 -down 9 - left
 // T - target for snake on map (after eat target Z - left X - right C - up V - down)
 
 
-void snake_init(void); //основная функция
-void tail_move(int x, int y);
-void head_move(int x, int y);
+void snake_init(ADC_HandleTypeDef hadc1); //основная функция
+void tail_move(uint32_t x, uint32_t y);
+void head_move(uint32_t x, uint32_t y);
 
 #endif /* INC_SNAKE_H_ */

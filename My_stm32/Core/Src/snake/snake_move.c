@@ -1,10 +1,11 @@
 #include "snake.h"
 
 
-void tail_move(int x, int y)
+void tail_move(uint32_t x, uint32_t y)
 {
-	int tmp_x = x;
-	int tmp_y = y;
+	uint32_t tmp_x = x;
+	uint32_t tmp_y = y;
+
 	if(snake_vector[y][x] == 'r')
 	{
 		x = ((x + 1) < OLED_WIDTH / 2) ? x : -1;
@@ -67,7 +68,7 @@ void tail_move(int x, int y)
 	}
 }
 
-void head_move(int x, int y)
+void head_move(uint32_t x, uint32_t y)
 {
 	if(snake_vector[y][x] == '3')
 	{

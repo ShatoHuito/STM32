@@ -7,12 +7,12 @@
 
 #include "snake.h"
 
-int snake_len = 8;
-int init_flag = 0;
+uint32_t snake_len = 8;
+uint32_t init_flag = 0;
 
-uint8_t y_pixel_bit_return(int y, int fl)
+uint8_t y_pixel_bit_return(uint32_t y, uint32_t fl)
 {
-	int ost;
+	uint32_t ost;
 	ost = y % 4;
 
 	if(ost == 0)
@@ -40,8 +40,8 @@ void game_over(void)
 
 void snake_screen_print()
 {
-	int y = 0;
-	int x;
+	uint32_t y = 0;
+	uint32_t x;
 
 	while(y < OLED_HEIGHT / 8)
 	{
@@ -78,10 +78,10 @@ void snake_screen_print()
 
 void snake_move()
 {
-	int y = 0;
-	int x;
-	int tail_fl = 0;
-	int head_fl = 0;
+	uint32_t y = 0;
+	uint32_t x;
+	uint32_t tail_fl = 0;
+	uint32_t head_fl = 0;
 
 	while(y < OLED_HEIGHT / 2) // 32
 	{
@@ -133,14 +133,19 @@ void snake_move()
 }
 
 
-void snake_init()
+void snake_init(ADC_HandleTypeDef hadc1)
 {
+	HAL_ADC_PollForConversion(&hadc1, 1000);
 	srand(HAL_GetTick());
-	int x = rand() % 64;
-	int y = rand() % 32;
-//	x = 25;
-//	y = 4;
-	int i = 0;
+	uint32_t tmpi = 0;
+	while(tmpi < 100){
+		uint32_t tmp = HAL_ADC_GetValue(&hadc1);
+		tmpi++;
+	}
+	uint32_t x = (rand() + HAL_ADC_GetValue(&hadc1)) % 64;
+	uint32_t y = (rand() + HAL_ADC_GetValue(&hadc1)) % 32;
+	uint32_t i = 0;
+
 	while(i < snake_len)
 	{
 		snake_vector[y][x + i] = 'R';
@@ -148,22 +153,25 @@ void snake_init()
 	}
 	snake_vector[y][x] = 'r';
 	snake_vector[y][x + i - 1] = '3';
-	x = rand() % 64;
-	y = rand() % 32;
+	while(snake_vector[y][x] != '\0')
+	{
+		x = (rand() + HAL_ADC_GetValue(&hadc1)) % 64;
+		y = (rand() + HAL_ADC_GetValue(&hadc1)) % 32;
+	}
 	snake_vector[y][x] = 'T';
 	snake_screen_print();
 	while(1)
 	{
-		HAL_Delay(40);
+		osDelay(100);
 		snake_move();
 		if(eat_flag)
 		{
-			x = rand() % 64;
-			y = rand() % 32;
+			x = (rand() + HAL_ADC_GetValue(&hadc1)) % 64;
+			y = (rand() + HAL_ADC_GetValue(&hadc1)) % 32;
 			while(snake_vector[y][x] != '\0')
 			{
-				x = rand() % 64;
-				y = rand() % 32;
+				x = (rand() + HAL_ADC_GetValue(&hadc1)) % 64;
+				y = (rand() + HAL_ADC_GetValue(&hadc1)) % 32;
 			}
 			snake_vector[y][x] = 'T';
 			eat_flag = 0;

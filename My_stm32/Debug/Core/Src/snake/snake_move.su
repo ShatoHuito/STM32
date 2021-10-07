@@ -1,2 +1,2 @@
 snake_move.c:4:6:tail_move	24	static
-snake_move.c:70:6:head_move	16	static
+snake_move.c:71:6:head_move	16	static
