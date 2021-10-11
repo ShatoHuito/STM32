@@ -6,6 +6,7 @@
  */
 
 #include "snake.h"
+#include "cmsis_os.h"
 
 uint32_t snake_len = 8;
 uint32_t init_flag = 0;
@@ -137,15 +138,11 @@ void snake_init(ADC_HandleTypeDef hadc1)
 {
 	HAL_ADC_PollForConversion(&hadc1, 1000);
 	srand(HAL_GetTick());
-	uint32_t tmpi = 0;
-	while(tmpi < 100){
-		uint32_t tmp = HAL_ADC_GetValue(&hadc1);
-		tmpi++;
-	}
 	uint32_t x = (rand() + HAL_ADC_GetValue(&hadc1)) % 64;
 	uint32_t y = (rand() + HAL_ADC_GetValue(&hadc1)) % 32;
 	uint32_t i = 0;
-
+	if (x + snake_len > (OLED_WIDTH / 2))
+		x -= snake_len;
 	while(i < snake_len)
 	{
 		snake_vector[y][x + i] = 'R';
@@ -153,6 +150,8 @@ void snake_init(ADC_HandleTypeDef hadc1)
 	}
 	snake_vector[y][x] = 'r';
 	snake_vector[y][x + i - 1] = '3';
+	x = (rand() + HAL_ADC_GetValue(&hadc1) * 2) % 64;
+	y = (rand() + HAL_ADC_GetValue(&hadc1) * 3) % 32;
 	while(snake_vector[y][x] != '\0')
 	{
 		x = (rand() + HAL_ADC_GetValue(&hadc1)) % 64;
@@ -171,7 +170,7 @@ void snake_init(ADC_HandleTypeDef hadc1)
 			while(snake_vector[y][x] != '\0')
 			{
 				x = (rand() + HAL_ADC_GetValue(&hadc1)) % 64;
-				y = (rand() + HAL_ADC_GetValue(&hadc1)) % 32;
+				y = (rand() + HAL_ADC_GetValue(&hadc1) * 2) % 32;
 			}
 			snake_vector[y][x] = 'T';
 			eat_flag = 0;

@@ -1,5 +1,5 @@
-snake.c:13:9:y_pixel_bit_return	24	static
-snake.c:29:6:game_over	8	static
-snake.c:41:6:snake_screen_print	24	static
-snake.c:79:6:snake_move	24	static
-snake.c:136:6:snake_init	40	static
+snake.c:14:9:y_pixel_bit_return	24	static
+snake.c:30:6:game_over	8	static
+snake.c:42:6:snake_screen_print	24	static
+snake.c:80:6:snake_move	24	static
+snake.c:137:6:snake_init	32	static
